@@ -46,7 +46,9 @@ Input
 **2**
 
 **11 9 2006**
+
 **11 12 2024**
+
 Output
 ____
 ![image](https://github.com/user-attachments/assets/d81bb50f-0d1f-46e4-a5db-c5f84160530f)
