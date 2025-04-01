@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 class Date implements Comparable<Date> {
     int day;
@@ -20,8 +18,8 @@ class Date implements Comparable<Date> {
         if (month < 1 || month > 12 || day < 1 || day > 31) {
             return false;
         }
-        int daysinMonth[] = {0, 31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        return day <= daysinMonth[month];
+        int daysInMonth[] = {0, 31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        return day <= daysInMonth[month];
     }
 
     boolean isLeapYear(int year) {
@@ -38,7 +36,7 @@ class Date implements Comparable<Date> {
         }
     }
 
-    String weekday() {
+    String getDayOfWeek() {
         int d = this.day;
         int m = this.month;
         int y = this.year;
@@ -54,7 +52,7 @@ class Date implements Comparable<Date> {
         return days[h];
     }
 
-    int calculateDiff(Date otherDate) {
+    int calculateDifference(Date otherDate) {
         int totalDays1 = countDays(this);
         int totalDays2 = countDays(otherDate);
         return Math.abs(totalDays1 - totalDays2);
@@ -103,18 +101,18 @@ class Date implements Comparable<Date> {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         ArrayList<Date> dates = new ArrayList<>();
 
-        System.out.println("Welcome to Date Program!");
-        System.out.print("Enter number of dates: ");
-        int n = scanner.nextInt();
+        System.out.println("Welcome to Date Program ");
+        System.out.print("Please enter number of dates: ");
+        int n = in.nextInt();
 
         for (int i = 0; i < n; i++) {
-            System.out.print("Enter day, month, year (separated by spaces): ");
-            int day = scanner.nextInt();
-            int month = scanner.nextInt();
-            int year = scanner.nextInt();
+            System.out.print("Enter day, month, year \n(please separate by spaces)\n(our era only): ");
+            int day = in.nextInt();
+            int month = in.nextInt();
+            int year = in.nextInt();
 
             try {
                 dates.add(new Date(day, month, year));
@@ -127,7 +125,7 @@ class Date implements Comparable<Date> {
         System.out.println("\nAll entered dates:");
         for (Date d : dates) {
             d.printDate();
-            System.out.println("Day of week: " + d.weekday());
+            System.out.println("Day of week: " + d.getDayOfWeek());
         }
 
         Collections.sort(dates);
@@ -142,13 +140,13 @@ class Date implements Comparable<Date> {
                 for (int j = i + 1; j < dates.size(); j++) {
                     Date d1 = dates.get(i);
                     Date d2 = dates.get(j);
-                    System.out.println(d1.day + "/" + d1.month + "/" + d1.year +
-                            " and " + d2.day + "/" + d2.month + "/" + d2.year +
-                            ": " + d1.calculateDiff(d2) + " days difference");
+                    System.out.println(d1.day + "." + d1.month + "." + d1.year +
+                            " and " + d2.day + "." + d2.month + "." + d2.year +
+                            " is: " + d1.calculateDifference(d2) + " days difference.");
                 }
             }
         }
 
-        scanner.close();
+        in.close();
     }
 }
